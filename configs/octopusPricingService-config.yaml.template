@@ -1,0 +1,21 @@
+database:
+  db_host: "postgres"
+  db_port: 5432
+  db_user: "test"
+  db_password: "test"
+  db_name: "energy-usage"
+kafka:
+  consumer:
+    topics: ["energy_processor"]
+    groupid: "octopusPricingService"
+    host: "kafka"
+    port: 9092
+  producer:
+    topic: "completion"
+    host: "kafka"
+    port: 9092
+servicename: "octopusPricingService"
+octopus:
+  productCode: "PRODUCT_CODE"
+  tarrifcode: "TARRIF_CODE"
+

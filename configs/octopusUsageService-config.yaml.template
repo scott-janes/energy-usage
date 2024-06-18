@@ -1,0 +1,21 @@
+database:
+  DB_HOST: "postgres"
+  DB_PORT: 5432
+  DB_USER: "test"
+  DB_PASSWORD: "test"
+  DB_NAME: "energy-usage"
+kafka:
+  consumer:
+    topics: ["energy_processor"]
+    groupId: "octopusUsageService"
+    host: "kafka"
+    port: 9092
+  producer:
+    topic: "completion"
+    host: "kafka"
+    port: 9092
+serviceName: "octopusUsageService"
+octopus:
+  apiKey: "API_KEY"
+  mpan: "MPNA"
+  serialNumber: "SERIAL_NUMBER"

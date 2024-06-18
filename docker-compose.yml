@@ -1,0 +1,106 @@
+services:
+  kafka:
+    image: confluentinc/cp-kafka:6.0.14
+    depends_on:
+      - zookeeper
+    ports:
+      - '29092:29092'
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka:9092,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    volumes:
+      - broker-data:/var/lib/kafka/data
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 8085:8080
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      DYNAMIC_CONFIG_ENABLED: 'true'
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.0.14
+    ports:
+      - '22181:2181'
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    volumes:
+      - zoo-data:/var/lib/zookeeper/data
+      - zoo-log:/var/lib/zookeeper/log
+
+  postgres:
+    image: postgres:alpine
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=energy-usage
+
+  aggregation-service:
+    build:
+      context: ./aggregationService
+      dockerfile: ../Dockerfile
+    image: aggregationservice
+    profiles: [energy-usage]
+    volumes:
+      - ./configs/aggregationService-config.yaml:/energyUsage/config.yaml
+
+
+  c02-service:
+    build:
+      context: ./c02Service
+      dockerfile: ../Dockerfile
+    image: c02service
+    profiles: [energy-usage]
+    volumes:
+      - ./configs/c02Service-config.yaml:/energyUsage/config.yaml
+
+
+  mix-service:
+    build:
+      context: ./mixService
+      dockerfile: ../Dockerfile
+    image: mixservice
+    profiles: [energy-usage]
+    volumes:
+      - ./configs/mixService-config.yaml:/energyUsage/config.yaml
+
+
+  octopus-pricing-service:
+    build:
+      context: ./octopusPricingService
+      dockerfile: ../Dockerfile
+    image: octopuspricingservice
+    profiles: [energy-usage]
+    volumes:
+      - ./configs/octopusPricingService-config.yaml:/energyUsage/config.yaml
+
+
+  octopus-usage-service:
+    build:
+      context: ./octopusUsageService
+      dockerfile: ../Dockerfile
+    image: octopususageservice
+    profiles: [energy-usage]
+    volumes:
+      - ./configs/octopusUsageService-config.yaml:/energyUsage/config.yaml
+
+volumes:
+  broker-data:
+  zoo-data:
+  zoo-log:
+  postgres-data:
+

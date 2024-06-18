@@ -1,0 +1,18 @@
+database:
+  DB_HOST: "postgres"
+  DB_PORT: 5432
+  DB_USER: "test"
+  DB_PASSWORD: "test"
+  DB_NAME: "energy-usage"
+kafka:
+  consumer:
+    topics: ["energy_processor"]
+    groupId: "c02Service"
+    host: "kafka"
+    port: 9092
+  producer:
+    topic: "completion"
+    host: "kafka"
+    port: 9092
+serviceName: "c02Service"
+

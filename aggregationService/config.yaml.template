@@ -1,0 +1,18 @@
+database:
+  DB_HOST: "localhost"
+  DB_PORT: 5432
+  DB_USER: "test"
+  DB_PASSWORD: "test"
+  DB_NAME: "energy-usage"
+kafka:
+  consumer:
+    topics: ["completion"]
+    groupId: "aggregationService"
+    host: "localhost"
+    port: 29092
+  producer:
+    topic: "completion"
+    host: "localhost"
+    port: 29092
+serviceName: "aggregationService"
+

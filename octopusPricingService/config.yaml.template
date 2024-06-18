@@ -1,0 +1,20 @@
+database:
+  db_host: "localhost"
+  db_port: 5432
+  db_user: "test"
+  db_password: "test"
+  db_name: "energy-usage"
+kafka:
+  consumer:
+    topics: ["energy_processor"]
+    groupid: "octopusPricingService"
+    host: "localhost"
+    port: 29092
+  producer:
+    topic: "completion"
+    host: "localhost"
+    port: 29092
+servicename: "octopusPricingService"
+octopus:
+  productCode: "PRODUCT_CODE"
+  tarrifcode: "TARRIF_CODE"
