@@ -58,10 +58,10 @@ The application consists of several microservices, each responsible for differen
 - **Subscribes to**: `completion`
 - **Cache**: Tracks which services have completed processing for a specific date. Triggers aggregation when data from all four services is available for that date.
 
-*** 6. CLI tool
+### 6. CLI tool
 - **Function**: CLI tool to setup kafka and add events to kafka
 
-*** 7. Shared
+### 7. Shared
 - **Finction**: Common code to be used by all services
 
 ## Setup
@@ -103,7 +103,7 @@ The application consists of several microservices, each responsible for differen
 
 5. **Initialize the Kafka Broker**
 
-    Ensure that the Kafka broker is up and running. Run the cli-tool if necessary to create the required topics. See cli-tool README for more details.
+    Ensure that the Kafka broker is up and running. Run the cli-tool if necessary to create the required topics. See cli-tool [README](./cli-tool/README.md) for more details.
 
     The kafka broker can be see using a kafka UI by visiting `http://localhost:8085`
 
