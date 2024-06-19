@@ -100,7 +100,11 @@ services:
 
 volumes:
   broker-data:
+    name: broker-data
   zoo-data:
+    name: zoo-data
   zoo-log:
+    name: zoo-log
   postgres-data:
+    name: postgres-data
 

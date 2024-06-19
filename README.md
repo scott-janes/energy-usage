@@ -132,12 +132,12 @@ go run main.go
 
 ## TODO
 
-| Task                                                      | Status   |
-|-----------------------------------------------------------|----------|
-| Add API layer                                             | Pending  |
-| Add UI layer                                              | Pending  |
-| Move configuration settings to `.env` files               | Pending  |
-| Update cache on aggregation service                       | Pending  |
-| Add more information to the README                        | Pending  |
-| Update CLI tool to try fetch octopus info automatically   | Pending  |
-| Make shared a proper package                              | Pending  |
+| Task                                                      | Status        |
+|-----------------------------------------------------------|---------------|
+| Add API layer                                             | In-Progress   |
+| Add UI layer                                              | Pending       |
+| Move configuration settings to `.env` files               | Pending       |
+| Update cache on aggregation service                       | Pending       |
+| Add more information to the README                        | Pending       |
+| Update CLI tool to try fetch octopus info automatically   | Pending       |
+| Make shared a proper package                              | Pending       |

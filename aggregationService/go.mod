@@ -5,13 +5,11 @@ go 1.21.5
 require (
 	github.com/confluentinc/confluent-kafka-go/v2 v2.4.0
 	github.com/jellydator/ttlcache/v3 v3.2.0
-	github.com/leekchan/accounting v1.0.0
 	github.com/rs/zerolog v1.33.0
 	github.com/scott-janes/energy-usage/shared v0.0.0-00010101000000-000000000000
 )
 
 require (
-	github.com/cockroachdb/apd v1.1.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
@@ -28,7 +26,6 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
-	github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
 	github.com/spf13/cast v1.6.0 // indirect
