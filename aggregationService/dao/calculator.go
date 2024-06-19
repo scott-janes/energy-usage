@@ -2,10 +2,8 @@ package dao
 
 import (
 	"context"
-	"fmt"
 	"math"
 
-	"github.com/leekchan/accounting"
 	"github.com/rs/zerolog"
 )
 
@@ -48,17 +46,6 @@ func CalculateDailySummary(ctx context.Context, data *[]EnergyData, date string,
 		mixPercentage = append(mixPercentage, MixPercentage{Fuel: fuel, Percentage: formatFloat(usage / totalEnergyUsed)})
 	}
 	averageCarbonIntensity := totalCarbonIntensity / totalEnergyUsed
-
-	ac := accounting.Accounting{Symbol: "£", Precision: 2, Thousand: ",", Decimal: "."}
-	kwh := accounting.Accounting{Symbol: "kWh", Precision: 2, Thousand: ",", Decimal: ".", Format: "%v%s"}
-	c02 := accounting.Accounting{Symbol: "gCO2/kWh", Precision: 2, Thousand: ",", Decimal: ".", Format: "%v%s"}
-	perc := accounting.Accounting{Symbol: "%", Precision: 2, Thousand: ",", Decimal: ".", Format: "%v%s"}
-
-	fmt.Printf("Total cost inc vat: %v, total cost exc vat: %v, total energy used: %v, average carbon intensity: %v, total carbon intensity: %v\n", ac.FormatMoney(totalEnergyCostIncVat/100), ac.FormatMoney(totalEnergyCostExcVat/100), kwh.FormatMoney(totalEnergyUsed), c02.FormatMoney(averageCarbonIntensity), c02.FormatMoney(totalCarbonIntensity))
-
-	for _, item := range mixPercentage {
-		fmt.Printf("%s: %s\n", item.Fuel, perc.FormatMoney(item.Percentage))
-	}
 
 	return &DailySummary{
 		Date:                   date,
